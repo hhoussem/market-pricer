@@ -34,6 +34,21 @@ public class MarketPricer {
 
     private static BigDecimal calculateFixedPriceQuantity(Product product, int totalQuantity) {
         BigDecimal price = new BigDecimal(0);
+        FixedPriceQuantityDeal fpqDeal = (FixedPriceQuantityDeal) product.getDeal();
+        int nbDeal = totalQuantity / fpqDeal.getQuantity();
+        if(nbDeal > 0) {
+            System.out.println("Deal : " + fpqDeal.getQuantity() + " " + product.getName()
+                    + "(s) for " + fpqDeal.getPrice() + " € was applied " + nbDeal + " time(s)");
+            price = price.add(new BigDecimal(nbDeal).multiply(fpqDeal.getPrice()));
+            int remainingQuantity = totalQuantity % fpqDeal.getQuantity();
+            System.out.println("Remaining quantity (" + remainingQuantity + ") was sold for " + product.getUnitPrice() + " each");
+            price = price.add(new BigDecimal(remainingQuantity).multiply(product.getUnitPrice()));
+            System.out.println("Total price is: "
+                    +nbDeal+" * "+fpqDeal.getPrice()+" + "+remainingQuantity+" * "+product.getUnitPrice()+" = "+price+"€");
+        }
+        else{
+            return calculateNormalPrice(product,totalQuantity);
+        }
         return price;
     }
 
