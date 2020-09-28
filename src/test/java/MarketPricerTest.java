@@ -9,10 +9,10 @@ public class MarketPricerTest {
     public void calculateNormalPrice() {
         Product product = new Product();
         product.setName("Bottle 1L Milk");
-        product.setUnitPrice(new BigDecimal(2));
+        product.setUnitPrice(new BigDecimal("2.01"));
         product.setDeal(null);
 
-        Assert.assertEquals(new BigDecimal(12),MarketPricer.calculatePrice(product, 6));
+        Assert.assertEquals(new BigDecimal("12.06"),MarketPricer.calculatePrice(product, 6));
     }
 
     @Test
@@ -37,10 +37,10 @@ public class MarketPricerTest {
 
         Product product = new Product();
         product.setName("Yogurt pack 8 * 125g");
-        product.setUnitPrice(new BigDecimal(2));
+        product.setUnitPrice(new BigDecimal("2"));
         product.setDeal(fqDeal);
 
-        Assert.assertEquals(new BigDecimal(16),MarketPricer.calculatePrice(product, 12));
+        Assert.assertEquals(new BigDecimal("16"),MarketPricer.calculatePrice(product, 12));
     }
 
 

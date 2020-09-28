@@ -2,11 +2,7 @@ import java.math.BigDecimal;
 
 public class MarketPricer {
 
-    private static char EURO = '€';
-
-    public static void main(String[] args) {
-        System.out.println("Hello from Market pricer");
-    }
+    private static final char EURO = '€';
 
     public static BigDecimal calculatePrice(Product product, int totalQuantity) {
         System.out.println("----------------");
