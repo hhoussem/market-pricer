@@ -26,6 +26,8 @@ public class MarketPricerTest {
         product.setUnitPrice(new BigDecimal("2.50"));
         product.setDeal(fpqDeal);
 
+        Assert.assertTrue(new BigDecimal("5").compareTo(MarketPricer.calculatePrice(product, 2)) == 0);
+        Assert.assertTrue(new BigDecimal("5.99").compareTo(MarketPricer.calculatePrice(product, 3)) == 0);
         Assert.assertTrue(new BigDecimal("16.98").compareTo(MarketPricer.calculatePrice(product, 8)) == 0);
     }
 
@@ -40,6 +42,11 @@ public class MarketPricerTest {
         product.setUnitPrice(new BigDecimal("2"));
         product.setDeal(fqDeal);
 
+        Assert.assertEquals(new BigDecimal("2"),MarketPricer.calculatePrice(product, 1));
+        Assert.assertEquals(new BigDecimal("6"),MarketPricer.calculatePrice(product, 3));
+        Assert.assertEquals(new BigDecimal("8"),MarketPricer.calculatePrice(product, 4));
+        Assert.assertEquals(new BigDecimal("6"),MarketPricer.calculatePrice(product, 5));
+        Assert.assertEquals(new BigDecimal("8"),MarketPricer.calculatePrice(product, 6));
         Assert.assertEquals(new BigDecimal("16"),MarketPricer.calculatePrice(product, 12));
     }
 
