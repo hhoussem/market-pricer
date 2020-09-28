@@ -8,7 +8,7 @@ public class MarketPricerTest {
     @Test
     public void calculateNormalPrice() {
         Product product = new Product();
-        product.setName("Milk");
+        product.setName("Bottle 1L Milk");
         product.setUnitPrice(new BigDecimal(2));
         product.setDeal(null);
 
@@ -22,7 +22,7 @@ public class MarketPricerTest {
         fpqDeal.setPrice(new BigDecimal("5.99"));
 
         Product product = new Product();
-        product.setName("Cake");
+        product.setName("Cake 120g");
         product.setUnitPrice(new BigDecimal("2.50"));
         product.setDeal(fpqDeal);
 
@@ -36,7 +36,7 @@ public class MarketPricerTest {
         fqDeal.setFreeQuantity(2);
 
         Product product = new Product();
-        product.setName("Milk");
+        product.setName("Yogurt pack 8 * 125g");
         product.setUnitPrice(new BigDecimal(2));
         product.setDeal(fqDeal);
 
