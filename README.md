@@ -24,6 +24,9 @@ The principal method is `MarketPricer.calculatePrice(Product product, int quanti
 
 You can add more deals by implementing `Deal` interface and then implementing the method  `calculatePrice(Product product, int totalQuantity);` and everything will work for you
 
+The program handles Units (PIECE, KG, L), you can add more units in `Unit.java`
+
+You can also handle scale of prices by changing the constant `MarketPricer.SCALE`
 
 Enjoy ;)
 
