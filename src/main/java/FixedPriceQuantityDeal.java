@@ -28,12 +28,13 @@ public class FixedPriceQuantityDeal implements Deal {
         FixedPriceQuantityDeal fpqDeal = (FixedPriceQuantityDeal) product.getDeal();
         BigDecimal nbDeal = totalQuantity.divideToIntegralValue(fpqDeal.getQuantity());
         if (nbDeal.compareTo(new BigDecimal(0)) > 0) {
-            System.out.println("Deal : " + fpqDeal.getQuantity() + " " + product.getName()
-                    + "(s) for " + fpqDeal.getPrice() + MarketPricer.EURO+ " was applied " + nbDeal + " time(s)");
+            Unit unit = product.getPrice().getUnit();
+            System.out.println("Deal : " + fpqDeal.getQuantity() + unit +" " + product.getName()
+                    + " for " + fpqDeal.getPrice() + MarketPricer.EURO+ " was applied " + nbDeal + " time(s)");
             price = price.add(nbDeal.multiply(fpqDeal.getPrice()));
             BigDecimal remainingQuantity = totalQuantity.remainder(fpqDeal.getQuantity());
             BigDecimal productUnitPrice = product.getPrice().getUnitPrice();
-            System.out.println("Remaining quantity (" + remainingQuantity + ") was sold for " + productUnitPrice + " each");
+            System.out.println("Remaining quantity (" + remainingQuantity +unit + ") was sold for " + productUnitPrice + MarketPricer.EURO + " each");
             price = price.add(remainingQuantity.multiply(productUnitPrice));
             System.out.println("Total price is: "
                     +nbDeal+" * "+fpqDeal.getPrice()+" + "+remainingQuantity+" * "+productUnitPrice+" = "+price+ MarketPricer.EURO);
