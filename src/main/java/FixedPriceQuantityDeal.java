@@ -2,15 +2,15 @@ import java.math.BigDecimal;
 
 public class FixedPriceQuantityDeal implements Deal {
 
-    private int quantity;
+    private BigDecimal quantity;
 
     private BigDecimal price;
 
-    public int getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
 
@@ -23,19 +23,20 @@ public class FixedPriceQuantityDeal implements Deal {
     }
 
     @Override
-    public BigDecimal calculatePrice(Product product, int totalQuantity) {
+    public BigDecimal calculatePrice(Product product, BigDecimal totalQuantity) {
         BigDecimal price = new BigDecimal(0);
         FixedPriceQuantityDeal fpqDeal = (FixedPriceQuantityDeal) product.getDeal();
-        int nbDeal = totalQuantity / fpqDeal.getQuantity();
-        if(nbDeal > 0) {
+        BigDecimal nbDeal = totalQuantity.divideToIntegralValue(fpqDeal.getQuantity());
+        if (nbDeal.compareTo(new BigDecimal(0)) > 0) {
             System.out.println("Deal : " + fpqDeal.getQuantity() + " " + product.getName()
                     + "(s) for " + fpqDeal.getPrice() + MarketPricer.EURO+ " was applied " + nbDeal + " time(s)");
-            price = price.add(new BigDecimal(nbDeal).multiply(fpqDeal.getPrice()));
-            int remainingQuantity = totalQuantity % fpqDeal.getQuantity();
-            System.out.println("Remaining quantity (" + remainingQuantity + ") was sold for " + product.getUnitPrice() + " each");
-            price = price.add(new BigDecimal(remainingQuantity).multiply(product.getUnitPrice()));
+            price = price.add(nbDeal.multiply(fpqDeal.getPrice()));
+            BigDecimal remainingQuantity = totalQuantity.remainder(fpqDeal.getQuantity());
+            BigDecimal productUnitPrice = product.getPrice().getUnitPrice();
+            System.out.println("Remaining quantity (" + remainingQuantity + ") was sold for " + productUnitPrice + " each");
+            price = price.add(remainingQuantity.multiply(productUnitPrice));
             System.out.println("Total price is: "
-                    +nbDeal+" * "+fpqDeal.getPrice()+" + "+remainingQuantity+" * "+product.getUnitPrice()+" = "+price+ MarketPricer.EURO);
+                    +nbDeal+" * "+fpqDeal.getPrice()+" + "+remainingQuantity+" * "+productUnitPrice+" = "+price+ MarketPricer.EURO);
         }
         else{
             price = Deal.calculateNormalPrice(product,totalQuantity);

@@ -2,13 +2,14 @@ import java.math.BigDecimal;
 
 public interface Deal {
 
-    BigDecimal calculatePrice(Product product, int totalQuantity);
+    BigDecimal calculatePrice(Product product, BigDecimal totalQuantity);
 
-    static BigDecimal calculateNormalPrice(Product product, int totalQuantity) {
+    static BigDecimal calculateNormalPrice(Product product, BigDecimal totalQuantity) {
         System.out.println("No deal was detected on this product, calculating normal price...");
-        BigDecimal price = product.getUnitPrice().multiply(new BigDecimal(totalQuantity));
-        System.out.println("Total price is: "
-                +totalQuantity+" * "+product.getUnitPrice()+" = "+price+ MarketPricer.EURO);
-        return price;
+        Price price = product.getPrice();
+        BigDecimal totalPrice = price.getUnitPrice().multiply(totalQuantity);
+        System.out.println("Total price of " + totalQuantity + " " + price.getUnit() + "(s) of " + product.getName() + " is: "
+                + totalQuantity + " * " + price.getUnitPrice() + " = " + totalPrice + MarketPricer.EURO);
+        return totalPrice;
     }
 }

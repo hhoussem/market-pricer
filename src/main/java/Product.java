@@ -1,4 +1,3 @@
-import java.math.BigDecimal;
 
 public class Product {
 
@@ -6,7 +5,7 @@ public class Product {
 
     private String name;
 
-    private BigDecimal unitPrice;
+    private Price price;
 
     private Deal deal;
 
@@ -26,12 +25,12 @@ public class Product {
         this.name = name;
     }
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
+    public Price getPrice() {
+        return price;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
     public Deal getDeal() {
