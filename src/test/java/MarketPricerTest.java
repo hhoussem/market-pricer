@@ -13,6 +13,7 @@ public class MarketPricerTest {
         product.setDeal(null);
 
         Assert.assertEquals(new BigDecimal("12.06"),MarketPricer.calculatePrice(product, new BigDecimal(6)));
+        Assert.assertNotEquals(new BigDecimal("12.060"),MarketPricer.calculatePrice(product, new BigDecimal(6)));
     }
 
     @Test
@@ -27,6 +28,7 @@ public class MarketPricerTest {
         product.setDeal(fpqDeal);
 
         Assert.assertEquals(new BigDecimal("5.00"),MarketPricer.calculatePrice(product, new BigDecimal("2")));
+        Assert.assertNotEquals(new BigDecimal("5"),MarketPricer.calculatePrice(product, new BigDecimal("2")));
         Assert.assertEquals(new BigDecimal("5.99"),MarketPricer.calculatePrice(product, new BigDecimal("3")));
         Assert.assertEquals(new BigDecimal("16.98"),MarketPricer.calculatePrice(product, new BigDecimal("8")));
     }
@@ -42,6 +44,7 @@ public class MarketPricerTest {
         product.setPrice(new Price(Unit.PIECE,new BigDecimal("2")));
         product.setDeal(fqDeal);
 
+        Assert.assertNotEquals(new BigDecimal("2.0"),MarketPricer.calculatePrice(product, new BigDecimal("1")));
         Assert.assertEquals(new BigDecimal("2.00"),MarketPricer.calculatePrice(product, new BigDecimal("1")));
         Assert.assertEquals(new BigDecimal("6.00"),MarketPricer.calculatePrice(product, new BigDecimal("3")));
         Assert.assertEquals(new BigDecimal("8.00"),MarketPricer.calculatePrice(product, new BigDecimal("4")));
