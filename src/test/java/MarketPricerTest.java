@@ -17,6 +17,17 @@ public class MarketPricerTest {
     }
 
     @Test
+    public void calculateNormalPrice_KG_UNIT() {
+        Product product = new Product();
+        product.setName("Apple Golden CAT");
+        product.setPrice(new Price(Unit.KG,new BigDecimal("1.50")));
+        product.setDeal(null);
+
+        Assert.assertEquals(new BigDecimal("6.30"),MarketPricer.calculatePrice(product, new BigDecimal("4.20")));
+        Assert.assertNotEquals(new BigDecimal("6.3000"),MarketPricer.calculatePrice(product, new BigDecimal("4.20")));
+    }
+
+    @Test
     public void calculateFixedPriceQuantityDeal() {
         FixedPriceQuantityDeal fpqDeal = new FixedPriceQuantityDeal();
         fpqDeal.setQuantity(new BigDecimal("3"));
@@ -31,6 +42,22 @@ public class MarketPricerTest {
         Assert.assertNotEquals(new BigDecimal("5"),MarketPricer.calculatePrice(product, new BigDecimal("2")));
         Assert.assertEquals(new BigDecimal("5.99"),MarketPricer.calculatePrice(product, new BigDecimal("3")));
         Assert.assertEquals(new BigDecimal("16.98"),MarketPricer.calculatePrice(product, new BigDecimal("8")));
+    }
+
+    @Test
+    public void calculateFixedPriceQuantityDeal_KG_UNIT() {
+        FixedPriceQuantityDeal fpqDeal = new FixedPriceQuantityDeal();
+        fpqDeal.setQuantity(new BigDecimal("1.5"));
+        fpqDeal.setPrice(new BigDecimal("2.10"));
+
+        Product product = new Product();
+        product.setName("Strawberry");
+        product.setPrice(new Price(Unit.KG,new BigDecimal("1.5")));
+        product.setDeal(fpqDeal);
+
+        Assert.assertEquals(new BigDecimal("2.85"),MarketPricer.calculatePrice(product, new BigDecimal("2")));
+        Assert.assertEquals(new BigDecimal("2.03"),MarketPricer.calculatePrice(product, new BigDecimal("1.350")));
+        Assert.assertNotEquals(new BigDecimal("2.025"),MarketPricer.calculatePrice(product, new BigDecimal("1.35")));
     }
 
     @Test

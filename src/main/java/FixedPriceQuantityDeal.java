@@ -29,7 +29,7 @@ public class FixedPriceQuantityDeal implements Deal {
         BigDecimal nbDeal = totalQuantity.divideToIntegralValue(fpqDeal.getQuantity());
         if (nbDeal.compareTo(new BigDecimal(0)) > 0) {
             Unit unit = product.getPrice().getUnit();
-            System.out.println("Deal : " + fpqDeal.getQuantity() + unit +" " + product.getName()
+            System.out.println("Deal : " + fpqDeal.getQuantity() +" " + unit +" " + product.getName()
                     + " for " + fpqDeal.getPrice() + MarketPricer.EURO+ " was applied " + nbDeal + " time(s)");
             price = price.add(nbDeal.multiply(fpqDeal.getPrice()));
             BigDecimal remainingQuantity = totalQuantity.remainder(fpqDeal.getQuantity());

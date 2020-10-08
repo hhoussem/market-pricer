@@ -1,4 +1,6 @@
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 public class MarketPricer {
 
@@ -23,7 +25,7 @@ public class MarketPricer {
         else {
             price = deal.calculatePrice(product, totalQuantity);
         }
-        return price.setScale(SCALE);
+        return price.setScale(SCALE, RoundingMode.CEILING);
     }
 
 }
