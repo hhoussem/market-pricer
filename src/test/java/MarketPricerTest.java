@@ -26,9 +26,9 @@ public class MarketPricerTest {
         product.setPrice(new Price(Unit.PIECE,new BigDecimal("2.5")));
         product.setDeal(fpqDeal);
 
-        Assert.assertTrue(new BigDecimal("5").compareTo(MarketPricer.calculatePrice(product, new BigDecimal("2"))) == 0);
-        Assert.assertTrue(new BigDecimal("5.99").compareTo(MarketPricer.calculatePrice(product, new BigDecimal("3"))) == 0);
-        Assert.assertTrue(new BigDecimal("16.98").compareTo(MarketPricer.calculatePrice(product, new BigDecimal("8"))) == 0);
+        Assert.assertEquals(new BigDecimal("5.00"),MarketPricer.calculatePrice(product, new BigDecimal("2")));
+        Assert.assertEquals(new BigDecimal("5.99"),MarketPricer.calculatePrice(product, new BigDecimal("3")));
+        Assert.assertEquals(new BigDecimal("16.98"),MarketPricer.calculatePrice(product, new BigDecimal("8")));
     }
 
     @Test
@@ -42,12 +42,12 @@ public class MarketPricerTest {
         product.setPrice(new Price(Unit.PIECE,new BigDecimal("2")));
         product.setDeal(fqDeal);
 
-        Assert.assertEquals(new BigDecimal("2"),MarketPricer.calculatePrice(product, new BigDecimal("1")));
-        Assert.assertEquals(new BigDecimal("6"),MarketPricer.calculatePrice(product, new BigDecimal("3")));
-        Assert.assertEquals(new BigDecimal("8"),MarketPricer.calculatePrice(product, new BigDecimal("4")));
-        Assert.assertEquals(new BigDecimal("6"),MarketPricer.calculatePrice(product, new BigDecimal("5")));
-        Assert.assertEquals(new BigDecimal("8"),MarketPricer.calculatePrice(product, new BigDecimal("6")));
-        Assert.assertEquals(new BigDecimal("16"),MarketPricer.calculatePrice(product, new BigDecimal("12")));
+        Assert.assertEquals(new BigDecimal("2.00"),MarketPricer.calculatePrice(product, new BigDecimal("1")));
+        Assert.assertEquals(new BigDecimal("6.00"),MarketPricer.calculatePrice(product, new BigDecimal("3")));
+        Assert.assertEquals(new BigDecimal("8.00"),MarketPricer.calculatePrice(product, new BigDecimal("4")));
+        Assert.assertEquals(new BigDecimal("6.00"),MarketPricer.calculatePrice(product, new BigDecimal("5")));
+        Assert.assertEquals(new BigDecimal("8.00"),MarketPricer.calculatePrice(product, new BigDecimal("6")));
+        Assert.assertEquals(new BigDecimal("16.00"),MarketPricer.calculatePrice(product, new BigDecimal("12")));
     }
 
 

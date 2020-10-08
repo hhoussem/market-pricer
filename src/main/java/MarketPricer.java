@@ -3,6 +3,7 @@ import java.math.BigDecimal;
 public class MarketPricer {
 
     public static final char EURO = '€';
+    public static final int SCALE = 2;
 
     /**
      *
@@ -15,12 +16,14 @@ public class MarketPricer {
         System.out.println("Calculating price of "+totalQuantity+" "+product.getPrice().getUnit()+"(s) of "+product.getName()
                 +" with unit price "+product.getPrice().getUnitPrice()+ MarketPricer.EURO);
         Deal deal = product.getDeal();
+        BigDecimal price;
         if (product.getDeal() == null) {
-            return Deal.calculateNormalPrice(product,totalQuantity);
+            price = Deal.calculateNormalPrice(product,totalQuantity);
         }
         else {
-            return deal.calculatePrice(product, totalQuantity);
+            price = deal.calculatePrice(product, totalQuantity);
         }
+        return price.setScale(SCALE);
     }
 
 }
